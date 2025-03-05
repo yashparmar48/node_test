@@ -1,0 +1,3 @@
+sudo apt install
+sudo apt install nginx
+sudo systemctl status nginx

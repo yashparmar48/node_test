@@ -35,3 +35,19 @@ export const addCustomer = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
+export const getCustomers = async (req, res) => {
+  try {
+    pool.query("SELECT * FROM tbl_customers", (error, results) => {
+      if (error) {
+        console.error("Error fetching customers:", error);
+        return res.status(500).json({ message: "Database error" });
+      }
+      res.status(200).json({ customers: results });
+    });
+  } catch (error) {
+    console.error("Server error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
