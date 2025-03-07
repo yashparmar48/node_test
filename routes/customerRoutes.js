@@ -1,5 +1,5 @@
 import express from 'express';
-import { addCustomer, getCustomers,removeCustomer,updateCustomer } from '../controllers/customerController.js'; // Import function properly
+import { addCustomer, fetchCustomerById, getCustomers,removeCustomer,updateCustomer } from '../controllers/customerController.js'; // Import function properly
 
 const router = express.Router();
 
@@ -8,7 +8,7 @@ router.post('/addCustomer', addCustomer); // Attach the function to handle reque
 // Uncomment these if you implement them later
 // router.get('/getCustomers', getCustomers);
 router.get("/getCustomers", getCustomers);
-// router.get('/:id', getCustomerById);
+router.get('/:id', fetchCustomerById);
 router.put('/updateCustomer/:id', updateCustomer);
 router.post('/removeCustomer/:id', removeCustomer);
 

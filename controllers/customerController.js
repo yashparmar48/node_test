@@ -124,3 +124,35 @@ export const updateCustomer = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+
+
+export const fetchCustomerById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({ message: "Customer ID is required" });
+    }
+
+    pool.query(
+      "SELECT * FROM tbl_customers WHERE id = ?",
+      [id],
+      (error, results) => {
+        if (error) {
+          console.error("Error fetching customer:", error);
+          return res.status(500).json({ message: "Database error" });
+        }
+
+        if (results.length === 0) {
+          return res.status(404).json({ message: "Customer not found" });
+        }
+
+        res.status(200).json({ customer: results[0] });
+      }
+    );
+  } catch (error) {
+    console.error("Server error:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
